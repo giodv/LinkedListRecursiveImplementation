@@ -50,7 +50,7 @@ namespace LeetCodeTests.DataStructures
             sut.AddLast(3);
             sut.AddAt(-1, 0);
             sut.Next!.Element.Should().Be(1);
-            sut.Element.Should().Be(1, "-1, 1, 2, 3");
+            sut.Element.Should().Be(-1, "-1, 1, 2, 3");
         }
 
         [Fact]
@@ -115,6 +115,31 @@ namespace LeetCodeTests.DataStructures
 
             var mergedList = sut.Merge(sut, sut1);
             mergedList.Next!.Next!.Element.Should().Be(5);
+        }
+
+        [Fact]
+        public void Test11()
+        {
+
+            var sut1 = new LinkedList(1);
+            sut1.AddLast(2);
+            sut1.AddLast(3);
+
+            var length = sut1.GetLength();
+            length.Should().Be(3);
+        }
+
+        [Fact]
+        public void Test12()
+        {
+
+            var sut1 = new LinkedList(1);
+            sut1.AddLast(2);
+            sut1.AddLast(3);
+            var reversed = sut1.Reverse();
+            reversed.Element.Should().Be(3);
+            reversed.Next!.Element.Should().Be(2);
+            reversed.Next!.Next!.Element.Should().Be(1);
         }
     }
 }

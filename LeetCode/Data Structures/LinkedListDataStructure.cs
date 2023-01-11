@@ -23,8 +23,13 @@
 
             public void AddFirst(int element)
             {
-                this.Next = new LinkedList(this.Element, this);
-                this.Element = element;
+                AddFirst(element, this);
+            }
+
+            public void AddFirst(int element, LinkedList list)
+            {
+                list.Next = new LinkedList(list.Element, list.Next);
+                list.Element = element;
             }
 
             public LinkedList AddLast(int element)
@@ -82,20 +87,29 @@
                 AddAt(element, index, this);
             }
 
-            private LinkedList AddAt(int element, int index, LinkedList? list)
+            private void AddAt(int element, int index, LinkedList? list, bool added = false)
             {
                 if (list == null && index > 0)
                 {
                     throw new IndexOutOfRangeException();
                 }
 
-                if (index == 0)
+                if (index == 1 && list.Next == null)
                 {
-                    AddFirst(element);
+                    AddLast(element);
+                    added = true;
                 }
 
-                list.Next = AddAt(element, --index, list.Next);
-                return list;
+                if (index == 0)
+                {
+                    AddFirst(element, list);
+                    added = true;
+                }
+
+                if (index > 0 && !added)
+                {
+                    AddAt(element, --index, list.Next, added);
+                }
             }
 
             public LinkedList RemoveAt(int index)
@@ -154,6 +168,50 @@
                 {
                     return new LinkedList(list2.Element, Merge(list1, list2?.Next));
                 }
+            }
+
+            public LinkedList Reverse()
+            {
+                if (this.Next != null)
+                {
+                    var length = GetLength();
+                    return Reverse(length, this);
+                }
+
+                return this;
+            }
+
+            private LinkedList Reverse(int length, LinkedList? linkedList)
+            {
+                if (length > 0 && linkedList != null)
+                {
+                    var head = linkedList.Element;
+                    linkedList.AddAt(head, length);
+                    linkedList = linkedList.RemoveFirst();
+                    return Reverse(length - 1, linkedList);
+                }
+
+                return linkedList;
+            }
+
+            public int GetLength()
+            {
+                if (this.Next == null)
+                {
+                    return 1;
+                }
+
+                return GetLength(1, this);
+            }
+
+            private int GetLength(int counter, LinkedList list)
+            {
+                if (list.Next == null)
+                {
+                    return counter;
+                }
+
+                return GetLength(counter + 1, list.Next);
             }
         }
     }
