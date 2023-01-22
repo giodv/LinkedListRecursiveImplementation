@@ -1,5 +1,6 @@
 using FluentAssertions;
 using LeetCode.Exercises.Easy;
+using LeetCode.Exercises.Random.Easy;
 
 namespace LeetCodeTests
 {
@@ -32,6 +33,16 @@ namespace LeetCodeTests
         {
             var index = _sut.GetFirstUniqCharOptimized("dddccdbba");
             index.Should().Be(8);
+        }
+
+        [Fact]
+        public void Test4()
+        {
+            int[] arr = { 20, 32, 51, 106, 400 };
+            int n = arr.Length;
+            int x = 106;
+
+            var index = BinarySearch.ArrayBinarySearch(arr, 0, n - 1, x);
         }
 
         

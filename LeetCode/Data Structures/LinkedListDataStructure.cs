@@ -15,7 +15,7 @@
                 this.Element = element;
             }
 
-            private LinkedList(int element, LinkedList next)
+            private LinkedList(int element, LinkedList? next)
             {
                 this.Element = element;
                 this.Next = next;
@@ -32,12 +32,12 @@
                 list.Element = element;
             }
 
-            public LinkedList AddLast(int element)
+            public LinkedList? AddLast(int element)
             {
                 return AddLast(element, this);
             }
 
-            private LinkedList AddLast(int element, LinkedList list)
+            private LinkedList? AddLast(int element, LinkedList? list)
             {
                 if (list.Next == null)
                 {
@@ -61,7 +61,7 @@
                 RemoveLast(this);
             }
 
-            private LinkedList RemoveLast(LinkedList list)
+            private LinkedList? RemoveLast(LinkedList? list)
             {
                 if (list.Next != null && list.Next.Next == null)
                 {
@@ -138,7 +138,7 @@
                 return list;
             }
 
-            public LinkedList Merge(LinkedList? list1, LinkedList? list2)
+            public LinkedList? Merge(LinkedList? list1, LinkedList? list2)
             {
                 if (list1 == null)
                     return list2;
@@ -212,6 +212,47 @@
                 }
 
                 return GetLength(counter + 1, list.Next);
+            }
+
+            public static LinkedList? AddTwoNumbers(LinkedList l1, LinkedList l2)
+            {
+                return AddTwoNumbers(l1, l2, 0);
+            }
+
+            private static LinkedList? AddTwoNumbers(
+                LinkedList? l1,
+                LinkedList? l2,
+                int carry = 0)
+            {
+                // ENDS ONLY WHEN CARRY = 0 and l1 == null and l2 == null
+                if (carry != 0 && l1 == null && l2 == null)
+                {
+                    return new LinkedList(carry);
+                }
+
+                var sum = (l1?.Element ?? 0) + (l2?.Element ?? 0) + carry;
+                var lastDigit = int.Parse(sum.ToString()[^1].ToString());
+                var newCarry = sum >= 10 ? int.Parse(sum.ToString()[0..2].ToString()) : 0;
+
+                if (l1 == null && l2 != null)
+                {
+                    l2.Element = lastDigit;
+                    return new LinkedList(l2.Element, AddTwoNumbers(l1, l2.Next, newCarry));
+                }
+
+                if (l2 == null && l1 != null)
+                {
+                    l1.Element = lastDigit;
+                    return new LinkedList(l2.Element, AddTwoNumbers(l1.Next, l2, newCarry));
+                }
+
+                if (carry != 0 && l1 == null && l2 == null)
+                {
+                    return new LinkedList(newCarry);
+                }
+
+                return new LinkedList(lastDigit,
+                    AddTwoNumbers(l1?.Next, l2?.Next, carry));
             }
         }
     }

@@ -141,5 +141,40 @@ namespace LeetCodeTests.DataStructures
             reversed.Next!.Element.Should().Be(2);
             reversed.Next!.Next!.Element.Should().Be(1);
         }
+
+        [Fact]
+        public void Test13()
+        {
+            var l1 = new LinkedList(1);
+            l1.AddLast(9);
+            l1.AddLast(3);
+
+            var l2 = new LinkedList(1);
+            l2.AddLast(3);
+            l2.AddLast(2);
+
+            var l3 = LinkedList.AddTwoNumbers(l1, l2);
+
+            l3.Element.Should().Be(2);
+            l3.Next!.Element.Should().Be(2);
+            l3.Next!.Next!.Element.Should().Be(6);
+        }
+
+        [Fact]
+        public void Test14()
+        {
+            var l1 = new LinkedList(9);
+
+            var l2 = new LinkedList(9);
+            l2.AddLast(9);
+            l2.AddLast(9);
+
+            var l3 = LinkedList.AddTwoNumbers(l1, l2);
+
+            l3.Element.Should().Be(8);
+            l3.Next!.Element.Should().Be(0);
+            l3.Next!.Next!.Element.Should().Be(0);
+            l3.Next!.Next!.Next!.Element.Should().Be(1);
+        }
     }
 }

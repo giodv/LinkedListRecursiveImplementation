@@ -15,18 +15,15 @@ namespace LeetCodeTests.Bloomberg
         [Fact]
         public void Test1()
         {
-            var nums = new int[2] { 1, 1 };
-            var result = _sut.RemoveDuplicates(nums);
+            var nums = new int[] {  1, 2 ,3 ,4, 1 };
+            var result = _sut.RemoveDuplicates(nums, 1);
             result.Should().Be(1);
         }
 
         [Fact]
         public void Test2()
         {
-            var nums = new int[3] { 1, 1, 2 };
-            var result = _sut.RemoveDuplicates(nums);
-            result.Should().Be(2);
-            nums.Should().BeEquivalentTo(new int[] { 1, 2 });
+           
         }
     }
 }

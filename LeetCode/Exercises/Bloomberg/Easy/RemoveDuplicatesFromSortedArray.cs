@@ -2,19 +2,22 @@
 {
     public class RemoveDuplicatesFromSortedArray
     {
-        public int RemoveDuplicates(int[] nums)
+        public int RemoveDuplicates(int[] nums, int val)
         {
-            int index = 1;
+            //1,2,3,4,1
 
-            for (int pos = 0; pos < nums.Length - 1; pos++)
+            // i = -1, 1,2,3,4,1 
+            //i = -1,  2, 1,3,4,1
+            //i = 0;   3,1,2,4,1
+            //i = 1;   3,4,1,2,1
+            // i = 2;  3,4,2,1,1,
+            int i = -1;
+            foreach (int num in nums)
             {
-                if (nums[pos] != nums[pos + 1])
-                {
-                    nums[index++] = nums[pos + 1];
-                }
+                if (num != val)
+                    nums[++i] = num;
             }
-
-            return index;
+            return i + 1;
         }
     }
-}
+} 
