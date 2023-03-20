@@ -12,7 +12,7 @@
             this.right = right;
         }
 
-        public bool IsSameTree(TreeNode p, TreeNode q)
+        public bool IsSameTree(TreeNode? p, TreeNode? q)
         {
             if (p?.val != q?.val) return false;
             if (p?.val == q?.val && p?.left == null && p?.right == null && q?.left == null && q?.right == null) return true;

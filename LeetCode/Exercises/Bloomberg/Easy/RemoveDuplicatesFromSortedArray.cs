@@ -4,20 +4,16 @@
     {
         public int RemoveDuplicates(int[] nums, int val)
         {
-            //1,2,3,4,1
-
-            // i = -1, 1,2,3,4,1 
-            //i = -1,  2, 1,3,4,1
-            //i = 0;   3,1,2,4,1
-            //i = 1;   3,4,1,2,1
-            // i = 2;  3,4,2,1,1,
-            int i = -1;
-            foreach (int num in nums)
+            var index = 0;
+            for (int i = 0; i < nums.Length - 1; i++)
             {
-                if (num != val)
-                    nums[++i] = num;
+                if (nums[i] != nums[i + 1])
+                {
+                    nums[index++] = nums[i];
+                }
             }
-            return i + 1;
+
+            return index;
         }
     }
-} 
+}

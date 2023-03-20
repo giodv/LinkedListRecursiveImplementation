@@ -17,7 +17,7 @@ namespace LeetCodeTests.Bloomberg
         {
             var nums = new int[] {  1, 2 ,3 ,4, 1 };
             var result = _sut.RemoveDuplicates(nums, 1);
-            result.Should().Be(1);
+            result.Should().Be(4);
         }
 
         [Fact]

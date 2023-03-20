@@ -36,5 +36,13 @@ namespace LeetCodeTests.Bloomberg.Easy
             indices[0].Should().Be(1);
             indices[1].Should().Be(2);
         }
+
+        [Fact]
+        public void Test3()
+        {
+            int[] test = { 1, 2, 3, 4 };
+            var indexResult = _sut.TwoSumsOptimized(test, 5);
+            indexResult.Should().BeEquivalentTo(new int[] { 0, 3 });
+        }
     }
 }
